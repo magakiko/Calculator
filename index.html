@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <h2>CALCULATOR BY KEDDAD YOUCEF</h2>
+        <div id="display">
+            <p id="disp"></p>
+        </div>
+        <div id="main-container">
+            <div id="numbers">
+                <button class="edbutton" id="clear">CE</button>
+                <button class="edbutton" id="delete">DELETE</button>
+                <button class="edbutton" id="onoff" value="off">ON/OFF</button>
+                <button class="numbutton" id="num7">7</button>
+                <button class="numbutton" id="num8">8</button>
+                <button class="numbutton" id="num9">9</button>
+                <button class="numbutton" id="num4">4</button>
+                <button class="numbutton" id="num5">5</button>
+                <button class="numbutton" id="num6">6</button>
+                <button class="numbutton" id="num1">1</button>
+                <button class="numbutton" id="num2">2</button>
+                <button class="numbutton" id="num3">3</button>
+                <div id="last-number">
+                    <button class="numbutton" id="num0">0</button>
+                    <button class="numbutton" id="colon.">.</button>
+                </div>
+                
+            </div>
+            <div id="operators">
+                <button class="opbutton" id="opr+">+</button>
+                <button class="opbutton" id="opr-">-</button>
+                <button class="opbutton" id="opr*">*</button>
+                <button class="opbutton" id="opr/">/</button>
+                <button class="opbutton" id="opr=">=</button>
+            </div>
+        </div>
+    </body>
+    <script>
+        function add (a, b) {
+	        return a + b;
+	    };
+
+        function subtract (a, b) {
+	        return a - b;
+        };
+        
+        function multiply(a, b) {
+            return a * b;
+        };
+
+        function devide(a, b) {
+            if (b == 0) return 'Can\'t devide by zero';
+            else return a / b;
+        };
+        
+        function operate(oper, a, b) {
+            switch(oper) {
+                case '+':
+                    return add(a, b);
+                break;
+                case '-':
+                    return subtract(a, b);
+                break;
+                case '*':
+                    return multiply(a, b);
+                break;
+                case '/':
+                    return devide(a, b);
+                break;
+
+            }
+        };
+        const para = document.getElementById('disp');
+        para.textContent = '';
+        const num0 = document.getElementById('num0');
+        const num1 = document.getElementById('num1');
+        const num2 = document.getElementById('num2');
+        const num3 = document.getElementById('num3');
+        const num4 = document.getElementById('num4');
+        const num5 = document.getElementById('num5');
+        const num6 = document.getElementById('num6');
+        const num7 = document.getElementById('num7');
+        const num8 = document.getElementById('num8');
+        const num9 = document.getElementById('num9');
+        const colon = document.getElementById('colon.');
+        const plus = document.getElementById('opr+');
+        const mines = document.getElementById('opr-');
+        const times = document.getElementById('opr*');
+        const dev = document.getElementById('opr/');
+        const clear = document.getElementById('clear');
+        const del = document.getElementById('delete');
+        const onoff = document.getElementById('onoff');
+        const equal = document.getElementById('opr=');
+
+        num0.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '0':para.textContent += '0');
+        num1.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '1':para.textContent += '1');
+        num2.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '2':para.textContent += '2');
+        num3.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '3':para.textContent += '3');
+        num4.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '4':para.textContent += '4');
+        num5.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '5':para.textContent += '5');
+        num6.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '6':para.textContent += '6');
+        num7.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '7':para.textContent += '7');
+        num8.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '8':para.textContent += '8');
+        num9.addEventListener('click', () => (para.textContent == '0') ? para.textContent = '9':para.textContent += '9');
+        colon.addEventListener('click', () => {
+            for(let i = 0; i < para.textContent.length; i++) {
+                if (i == (para.textContent.length - 1)) {
+                    para.textContent += '.';
+                    break;
+                }
+                let posscol = para.textContent.charAt(i);
+                if (posscol == '.') {
+                    break;
+                } else continue;
+            }
+            
+        });
+        plus.addEventListener('click', () => {
+            for(let i = 0; i < para.textContent.length; i++) {
+                let possop = para.textContent.charAt(i);
+                if (possop == '+') {
+                    o = '';
+                    p = '';
+                    for(let j = 0; j < i; j++) {
+                        o += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        p += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('+', Number(o), Number(p));
+                    break;
+                } else if (possop == '-') {
+                    c = '';
+                    d = '';
+                    for(let j = 0; j < i; j++) {
+                        c += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        d += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('-', Number(c), Number(d));
+                    break;
+
+                } else if (possop == '*') {
+                    e = '';
+                    f = '';
+                    for(let j = 0; j < i; j++) {
+                        e += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        f += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('*', Number(e), Number(f));
+                    break;
+
+                } else if (possop == '/') {
+                    k = '';
+                    l = '';
+                    for(let j = 0; j < i; j++) {
+                        k += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        l += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('/', Number(k), Number(l));
+                    break;
+
+                } else continue;
+            }
+            para.textContent += '+';
+        });
+        mines.addEventListener('click', () => {
+            for(let i = 0; i < para.textContent.length; i++) {
+                let possop = para.textContent.charAt(i);
+                if (possop == '+') {
+                    o = '';
+                    p = '';
+                    for(let j = 0; j < i; j++) {
+                        o += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        p += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('+', Number(o), Number(p));
+                    break;
+                } else if (possop == '-') {
+                    c = '';
+                    d = '';
+                    for(let j = 0; j < i; j++) {
+                        c += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        d += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('-', Number(c), Number(d));
+                    break;
+
+                } else if (possop == '*') {
+                    e = '';
+                    f = '';
+                    for(let j = 0; j < i; j++) {
+                        e += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        f += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('*', Number(e), Number(f));
+                    break;
+
+                } else if (possop == '/') {
+                    k = '';
+                    l = '';
+                    for(let j = 0; j < i; j++) {
+                        k += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        l += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('/', Number(k), Number(l));
+                    break;
+
+                } else continue;
+            }
+            para.textContent += '-';
+        });
+        times.addEventListener('click', () => {
+            for(let i = 0; i < para.textContent.length; i++) {
+                let possop = para.textContent.charAt(i);
+                if (possop == '+') {
+                    o = '';
+                    p = '';
+                    for(let j = 0; j < i; j++) {
+                        o += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        p += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('+', Number(o), Number(p));
+                    break;
+                } else if (possop == '-') {
+                    c = '';
+                    d = '';
+                    for(let j = 0; j < i; j++) {
+                        c += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        d += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('-', Number(c), Number(d));
+                    break;
+
+                } else if (possop == '*') {
+                    e = '';
+                    f = '';
+                    for(let j = 0; j < i; j++) {
+                        e += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        f += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('*', Number(e), Number(f));
+                    break;
+
+                } else if (possop == '/') {
+                    k = '';
+                    l = '';
+                    for(let j = 0; j < i; j++) {
+                        k += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        l += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('/', Number(k), Number(l));
+                    break;
+
+                } else continue;
+            }
+            para.textContent += '*';
+        });
+        dev.addEventListener('click', () => {
+            for(let i = 0; i < para.textContent.length; i++) {
+                let possop = para.textContent.charAt(i);
+                if (possop == '+') {
+                    o = '';
+                    p = '';
+                    for(let j = 0; j < i; j++) {
+                        o += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        p += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('+', Number(o), Number(p));
+                    break;
+                } else if (possop == '-') {
+                    c = '';
+                    d = '';
+                    for(let j = 0; j < i; j++) {
+                        c += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        d += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('-', Number(c), Number(d));
+                    break;
+
+                } else if (possop == '*') {
+                    e = '';
+                    f = '';
+                    for(let j = 0; j < i; j++) {
+                        e += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        f += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('*', Number(e), Number(f));
+                    break;
+
+                } else if (possop == '/') {
+                    k = '';
+                    l = '';
+                    for(let j = 0; j < i; j++) {
+                        k += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < para.textContent.length; j++) {
+                        l += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('/', Number(k), Number(l));
+                    break;
+
+                } else continue;
+            }
+            para.textContent += '/';
+        });
+        clear.addEventListener('click', () => para.textContent = '0');
+        del.addEventListener('click', () => para.textContent = para.textContent.slice(0, -1));
+        onoff.addEventListener('click', () => {
+            let currentValue = onoff.value;
+            if(currentValue == 'off') {
+                para.textContent = '';
+                onoff.value = 'on'
+            } else {
+                para.textContent = '0';
+                onoff.value = 'off' 
+            }
+        });
+        equal.addEventListener('click', () => {
+            let lng = para.textContent.length;
+            for(let i = 0; i < lng; i++) {
+                let operator = para.textContent.charAt(i);
+                switch(operator) {
+                    case '+':
+                    let o = '';
+                    let p = '';
+                    for(let j = 0; j < i; j++) {
+                        o += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < lng; j++) {
+                        p += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('+', Number(o), Number(p));
+                    break;
+                    case '-':
+                    let c = '';
+                    let d = '';
+                    for(let j = 0; j < i; j++) {
+                        c += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < lng; j++) {
+                        d += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('-', Number(c), Number(d));
+                    break;
+                    case '*':
+                    let e = '';
+                    let f = '';
+                    for(let j = 0; j < i; j++) {
+                        e += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < lng; j++) {
+                        f += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('*', Number(e), Number(f));
+                    break;
+                    case '/':
+                    let k = '';
+                    let l = '';
+                    for(let j = 0; j < i; j++) {
+                        k += para.textContent.charAt(j);
+                    }
+                    
+                    for(let j = i + 1; j < lng; j++) {
+                        l += para.textContent.charAt(j);
+                    }
+                    para.textContent = operate('/', Number(k), Number(l));
+                    break;
+                }
+            }
+            
+        });
+    </script>
+</html>
